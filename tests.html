@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Directory | Tiwari Path Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #001f3f; --gold: #d4af37; --light-bg: #f8f9fa; }
+        body { font-family: 'Open Sans', sans-serif; margin: 0; background: var(--light-bg); }
+
+        /* Artistic Header */
+        .header-section { background: var(--primary); padding: 40px 20px; text-align: center; color: white; }
+        .search-box { width: 90%; max-width: 500px; padding: 15px; border-radius: 30px; border: none; margin-top: 20px; font-size: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+
+        /* Navigation Menu (Symmetry with Home) */
+        header { background: var(--primary); padding: 10px 5%; display: flex; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        header a { color: white; text-decoration: none; margin: 0 10px; font-weight: 600; font-size: 14px; }
+
+        /* Accordion Menu */
+        .directory-container { max-width: 800px; margin: 20px auto; padding: 10px; }
+        .category-block { background: white; margin-bottom: 15px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        .category-header { background: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .category-header h3 { margin: 0; color: var(--primary); font-family: 'Montserrat'; font-size: 18px; }
+        .icon-plus { color: var(--gold); font-weight: bold; font-size: 20px; }
+
+        .test-list { display: none; padding: 10px 20px; background: #fff; border-top: 1px solid #f0f0f0; }
+        .test-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f9f9f9; }
+        .test-name { font-weight: 600; color: #444; }
+        .test-price { color: var(--primary); font-weight: bold; margin-right: 15px; }
+        
+        .book-btn { background: var(--gold); color: var(--primary); border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); }
+        .modal-content { background: white; margin: 20% auto; padding: 25px; border-radius: 20px; width: 80%; max-width: 350px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html">Home</a>
+    <a href="tests.html">Tests</a>
+    <a href="packages.html">Packages</a>
+    <a href="collaborations.html">Corporate</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+</header>
+
+<div class="header-section">
+    <h2 style="font-family: 'Montserrat';">Hamare Sabhi Tests 🔬</h2>
+    <input type="text" id="mainSearch" class="search-box" placeholder="Test ka naam search karein..." onkeyup="instantSearch()">
+</div>
+
+<div class="directory-container">
+    <div class="category-block">
+        <div class="category-header" onclick="toggleCategory(this)">
+            <h3>Hematology (Blood Tests) 🩸</h3>
+            <span class="icon-plus">+</span>
+        </div>
+        <div class="test-list">
+            <div class="test-row">
+                <span class="test-name">CBC (Complete Blood Count)</span>
+                <div><span class="test-price">₹300</span><button class="book-btn" onclick="openBooking('CBC', 300)">Book</button></div>
+            </div>
+            <div class="test-row">
+                <span class="test-name">Blood Group & Rh Type</span>
+                <div><span class="test-price">₹150</span><button class="book-btn" onclick="openBooking('Blood Group', 150)">Book</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="bookingModal" class="modal">
+    <div class="modal-content">
+        <h3 id="testTitle">Booking</h3>
+        <img src="1000636060.png" style="width: 200px; margin: 15px 0;" alt="QR Code">
+        <p>UPI ID: 7742089666123@ybl</p>
+        <button onclick="closeModal()" style="padding: 10px 20px; border: none; background: #eee; border-radius: 10px; cursor: pointer;">Band Karein</button>
+    </div>
+</div>
+
+<script>
+    function toggleCategory(header) {
+        const list = header.nextElementSibling;
+        const icon = header.querySelector('.icon-plus');
+        list.style.display = (list.style.display === "block") ? "none" : "block";
+        icon.innerText = (list.style.display === "block") ? "-" : "+";
+    }
+
+    function instantSearch() {
+        let input = document.getElementById('mainSearch').value.toLowerCase();
+        let rows = document.getElementsByClassName('test-row');
+        for (let row of rows) {
+            let name = row.querySelector('.test-name').innerText.toLowerCase();
+            row.style.display = name.includes(input) ? "flex" : "none";
+            if (name.includes(input)) row.parentElement.style.display = "block";
+        }
+    }
+
+    function openBooking(name, price) {
+        document.getElementById('testTitle').innerText = name + " - " + price;
+        document.getElementById('bookingModal').style.display = "block";
+    }
+
+    function closeModal() { document.getElementById('bookingModal').style.display = "none"; }
+</script>
+
+</body>
+</html>
