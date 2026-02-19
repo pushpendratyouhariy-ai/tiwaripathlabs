@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Packages | Tiwari Path Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #001f3f; --gold: #d4af37; --bg: #f0f2f5; }
+        body { font-family: 'Open Sans', sans-serif; background: var(--bg); margin: 0; padding-bottom: 50px; }
+
+        /* Navigation Menu */
+        header { background: var(--primary); padding: 15px 5%; display: flex; justify-content: center; position: sticky; top: 0; z-index: 1000; }
+        header a { color: white; text-decoration: none; margin: 0 10px; font-weight: 600; font-size: 14px; }
+
+        /* Header Area */
+        .page-title { background: var(--primary); color: white; padding: 40px 20px; text-align: center; }
+        .page-title h1 { font-family: 'Montserrat'; margin: 0; }
+
+        .package-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; padding: 25px; max-width: 1200px; margin: 0 auto; }
+
+        /* Glassmorphism Card Style */
+        .package-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 8px 32px rgba(0,31,63,0.1); transition: transform 0.3s ease; }
+        .package-card:hover { transform: translateY(-10px); }
+
+        .p-img { width: 100%; height: 200px; object-fit: cover; }
+        .p-info { padding: 20px; text-align: center; }
+        .p-info h3 { color: var(--primary); margin: 0; font-family: 'Montserrat'; }
+        
+        .price-box { display: flex; justify-content: space-around; align-items: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid #eee; }
+        .amt { font-size: 24px; font-weight: bold; color: var(--primary); }
+        .book-now { background: var(--primary); color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; }
+
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); }
+        .modal-content { background: white; margin: 15% auto; padding: 30px; border-radius: 20px; width: 85%; max-width: 350px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html">Home</a>
+    <a href="tests.html">Tests</a>
+    <a href="packages.html">Packages</a>
+    <a href="collaborations.html">Corporate</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+</header>
+
+<div class="page-title">
+    <h1>Artistic Health Packages 📦</h1>
+    <p>Aapki sehat hamari prathmikta hai.</p>
+</div>
+
+<div class="package-grid">
+    <div class="package-card">
+        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80" alt="Full Body" class="p-img">
+        <div class="p-info">
+            <h3>Full Body Master Checkup</h3>
+            <p>60+ Tests: CBC, LFT, KFT, Thyroid, aur Sugar shaamil hain.</p>
+            <div class="price-box">
+                <span class="amt">₹1,999</span>
+                <a href="#" class="book-now" onclick="openPayment('Full Body Master', 1999)">Book</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="paymentModal" class="modal">
+    <div class="modal-content">
+        <h3 id="pName">Package Booking</h3>
+        <img src="1000636060.png" style="width: 200px; margin: 15px 0;" alt="QR Code">
+        <p>UPI ID: 7742089666123@ybl</p>
+        <button onclick="closeModal()" style="border:none; padding:10px; border-radius:10px; cursor:pointer;">Band Karein</button>
+    </div>
+</div>
+
+<script>
+    function openPayment(name, price) {
+        document.getElementById('pName').innerText = name + " - " + price;
+        document.getElementById('paymentModal').style.display = "block";
+    }
+    function closeModal() { document.getElementById('paymentModal').style.display = "none"; }
+</script>
+
+</body>
+</html>
